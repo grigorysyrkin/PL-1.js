@@ -30,20 +30,33 @@ function retrieveMails(URLParameter) {
 		allResMails.push(resMails[i].slice(7,));
 		}
 	}
-	console.log(allResMails)
+	// console.log(allResMails)
 	for (var i = 0; i < resURLs.length; i++) {
 		if (allResURLs.indexOf(resURLs[i]) == -1) {
 			allResURLs.push(resURLs[i]);
 			var URLmatch = resURLs[i].match(/\bhref="http:\/\/www.mosigra/g);
-			if ((URLmatch != null) && (RecursionDepth < 3)) {
-				console.log(resURLs[i]);
-				// console.log(URLmatch);
-				// console.log((resURLs[i].slice(5,)));
-				// retrieveMails(resURLs[i].slice(5,));
-				retrieveMails("http://www.mosigra.ru/")
+			if ((URLmatch != null) && (RecursionDepth < 5)) {
+				// console.log(resURLs[i]);
+				// console.log(resURLs[i].slice(6, -1));
+
+
+				retrieveMails(resURLs[i].slice(6, -1));
+				// retrieveMails("http://www.mosigra.ru/")
 				}				
 			}
 		}
 	}
 
 retrieveMails(rootURL)
+// console.log(allResMails);
+
+var result = [];
+allResMails.forEach(function(item) {
+     if(result.indexOf(item) < 0) {
+         result.push(item);
+     }
+});
+
+console.log(result);
+
+
